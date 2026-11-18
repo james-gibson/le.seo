@@ -24,7 +24,8 @@ Repo: `~/projects/personal/le.seo`. Live: https://james-gibson.github.io/le.seo/
    `install a workspace`, `read a record`.
 4. It carries no superlative and no adjective the destination did not earn (the build refuses a
    banned list; the rest is judgement).
-5. `npm run copy` passes, and `npm run cards:check` passes if the sentence lives in a card.
+5. `npm run copy` passes, `npm run doors` opens every front door the tree names, and
+   `npm run cards:check` passes if the sentence lives in a card.
 
 ## Where the sentence lives
 

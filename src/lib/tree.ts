@@ -180,22 +180,12 @@ export const LINKS: Link[] = [
   {
     id: 'ade-stand',
     name: '@lemon/ade-stand',
-    url: 'https://github.com/gibsunas/lemon-ade-stand',
+    url: 'https://www.npmjs.com/package/@lemon/create-ade-stand',
     pitch: 'One command to install a ready-made workspace: npm create @lemon/ade-stand.',
     kind: 'project',
     voices: ['grower'],
     goals: ['try', 'adopt'],
     rung: 3,
-  },
-  {
-    id: 'fire-marshall',
-    name: 'fire-marshall',
-    url: 'https://github.com/james-gibson/fire-marshall',
-    pitch: 'The counter display: every protection the lab declares, against the state it is in.',
-    kind: 'lab',
-    voices: ['maintainer', 'packager'],
-    goals: ['verify'],
-    rung: 4,
   },
   {
     id: 'isotope',

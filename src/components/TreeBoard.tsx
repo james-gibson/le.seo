@@ -130,6 +130,8 @@ export function TreeBoard({
         <Link to="/tree/voices-and-goals">How a voice and a goal choose an order</Link>
         {' · '}
         <Link to="/tree/a-seed-describes-itself">Where the pitch copy comes from</Link>
+        {' · '}
+        <Link to="/tree/a-pitch-checks-its-doors">Which doors open</Link>
       </p>
     </>
   )

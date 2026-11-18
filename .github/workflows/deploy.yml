@@ -31,6 +31,11 @@ jobs:
       # that has quietly gone stale. Same trade as a vendored rules.md.
       - run: npm run cards:check
 
+      # Every destination is a door. A 404 front door, or an implicit link that
+      # leaves its mount, fails here rather than in front of a reader. Needs the
+      # network by nature, which is why it is a CI step and not part of build.
+      - run: npm run doors
+
       # tsc --noEmit, vite build, postbuild, and the publish guard.
       # A guard failure stops the deploy here, not in production.
       - run: npm run build

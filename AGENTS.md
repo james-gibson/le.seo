@@ -17,6 +17,8 @@ somebody else's work or starts inventing.
 - `src/cards/*.json` are **vendored** cards, pinned by `npm run cards:check` (runs in CI). Never
   hand-edit one; run `npm run cards`.
 - `npm run copy` is the gate: length, banned superlatives, a full stop, no name-first sentences.
+- `npm run doors` knocks on every destination: the front door must answer, and a root-absolute link
+  must stay under the site's mount. A pitch to a 404 is the one failure a visitor cannot forgive.
 
 ## Skills
 
