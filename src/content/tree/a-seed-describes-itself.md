@@ -62,6 +62,21 @@ npm run cards:check    # fail when a seed has moved
 check is a claim that can fail; a fetch at build time would make this build depend on eleven
 origins and would not work on a plane.
 
+## The skills
+
+Writing the copy is the only creative act here, so it ships as two skills rather than a style guide
+nobody opens:
+
+- **`pitch-a-seed`** — read the destination's card, pick the voice, write one sentence against the
+  voice table, run `npm run copy`. It refuses to rewrite a card's sentence: a consumer that edits a
+  seed's copy has started inventing again.
+- **`seed-card`** — for a seed that publishes no card. It runs *in that seed's repository*, drafts
+  `self-card.json` from the seed's own record, and wires the build step. A pitch site that writes
+  another seed's card is inventing one layer down.
+
+`/pitch <destination>` is the command that runs the first one. `npm run copy` is the gate they both
+end on: length, a banned list of superlatives, a full stop, no sentence that starts with a name.
+
 ## What it changes
 
 - **The copy belongs to the seed.** A pitch site that quotes cannot improve the sentence, and it

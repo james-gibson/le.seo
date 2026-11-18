@@ -8,7 +8,7 @@
   "license": "AGPL-3.0-only",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/seed-card.mjs && tsc --noEmit && node scripts/tokens.mjs && vite build && vite build --ssr scripts/prerender.tsx --outDir .prerender --emptyOutDir && node .prerender/prerender.js && node scripts/postbuild.mjs && node scripts/contrast.mjs && node scripts/a11y.mjs dist --fail-on high && node scripts/overflow.mjs && npm run check:tree && node scripts/verify-publish.mjs",
+    "build": "node scripts/seed-card.mjs && node scripts/copy.mjs && tsc --noEmit && node scripts/tokens.mjs && vite build && vite build --ssr scripts/prerender.tsx --outDir .prerender --emptyOutDir && node .prerender/prerender.js && node scripts/postbuild.mjs && node scripts/contrast.mjs && node scripts/a11y.mjs dist --fail-on high && node scripts/overflow.mjs && npm run check:tree && node scripts/verify-publish.mjs",
     "preview": "vite preview --base=/le.seo/",
     "smoke": "vite build --ssr scripts/smoke.tsx --outDir .smoke --emptyOutDir && node .smoke/smoke.js",
     "check": "tsc --noEmit",
@@ -18,7 +18,8 @@
     "check:tree": "vite build --ssr scripts/tree-check.ts --outDir .check --emptyOutDir && node .check/tree-check.js",
     "isotope": "python3 scripts/validate-spec.py features/giardiniera.feature --brine \"$HOME/projects/kb/projects/scripts/brine\"",
     "cards": "node scripts/cards.mjs",
-    "cards:check": "node scripts/cards.mjs --check"
+    "cards:check": "node scripts/cards.mjs --check",
+    "copy": "node scripts/copy.mjs"
   },
   "dependencies": {
     "react": "19.3.1",
