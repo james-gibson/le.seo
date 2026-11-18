@@ -1303,8 +1303,8 @@
 
 .badge--lilac {
   color: var(--le-night);
-  background: var(--le-lilac-soft);
-  border-color: var(--le-lilac-soft);
+  background: var(--le-lilac);
+  border-color: var(--le-lilac);
 }
 
 .dot {

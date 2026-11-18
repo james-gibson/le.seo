@@ -71,7 +71,6 @@ export interface Wall {
   pinkDeep: ColorInput
   night: ColorInput
   lilac: ColorInput
-  lilacSoft: ColorInput
   mint: ColorInput
   butter: ColorInput
 }
@@ -90,7 +89,6 @@ export const WALL: Wall = {
   pinkDeep: '#A3084F',
   night: '#0F0519',
   lilac: '#A98CFF',
-  lilacSoft: '#EADFFF',
   mint: '#9BE3C4',
   butter: '#F2D48A',
 }

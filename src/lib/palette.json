@@ -5,7 +5,7 @@
     {
       "name": "ink",
       "hex": "#241634",
-      "role": "the wall \u2014 aubergine nave"
+      "role": "the wall — aubergine nave"
     },
     {
       "name": "ink-deep",
@@ -35,7 +35,7 @@
     {
       "name": "smoke",
       "hex": "#F6EDFB",
-      "role": "body text \u2014 lilac-white incense"
+      "role": "body text — lilac-white incense"
     },
     {
       "name": "smoke-dim",
@@ -45,7 +45,7 @@
     {
       "name": "pink",
       "hex": "#EA0C79",
-      "role": "accent fill \u2014 a solid, never a small glyph"
+      "role": "accent fill — a solid, never a small glyph"
     },
     {
       "name": "pink-ink",
@@ -66,12 +66,6 @@
       "name": "lilac",
       "hex": "#A98CFF",
       "role": "lilac grain, decorative",
-      "decorative": true
-    },
-    {
-      "name": "lilac-soft",
-      "hex": "#EADFFF",
-      "role": "pale lilac, decorative",
       "decorative": true
     },
     {
@@ -161,7 +155,7 @@
     },
     {
       "fg": "night",
-      "bg": "lilac-soft",
+      "bg": "lilac",
       "min": 7,
       "note": "label on a lilac chip"
     },
