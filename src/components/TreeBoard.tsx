@@ -3,6 +3,15 @@ import { GOALS, VOICES, isGoal, isVoice, tree, type Goal, type Tree, type Voice 
 import { Button } from '../ui/controls'
 import { Badge, Row, Text } from '../ui/parts'
 
+/** The easter-egg key: a seed punches, a site is butter, an isotope is mint. */
+const KIND_INK: Record<string, 'accent' | 'mint' | 'butter' | 'lilac'> = {
+  seed: 'accent',
+  site: 'butter',
+  isotope: 'mint',
+  lab: 'lilac',
+  project: 'lilac',
+}
+
 /**
  * The tree board.
  *
@@ -92,7 +101,7 @@ export function TreeBoard({
                   {link.name}
                   <span aria-hidden="true"> ↗</span>
                 </a>
-                <Badge label={link.kind} intent={link.kind === 'seed' ? 'accent' : 'muted'} />
+                <Badge label={link.kind} intent={KIND_INK[link.kind] ?? 'muted'} />
                 <span className="tree__rung" title={`readiness ${link.rung}`}>
                   rung {link.rung}
                 </span>

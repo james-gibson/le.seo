@@ -11,8 +11,8 @@
  * vocabulary, same `density.paddingX` in character cells — so a control lifted
  * from the tuiparts catalogue lands here with its names intact.
  *
- * The wall itself (steelblue, gold grain, smoke, pink) is not part of the
- * tuiparts contract: it is le.ad's own ground, and it lives in Wall below.
+ * The wall itself (aubergine, lilac grain, incense, dark pink) is not part of
+ * the tuiparts contract: it is le.seo's own ground, and it lives in Wall below.
  * Keeping the two apart is what lets the parts be replaced without repainting
  * the room.
  */
@@ -54,8 +54,8 @@ export interface Tokens {
 }
 
 /**
- * le.ad's own ground. Not a tuiparts token, and not negotiable at runtime:
- * a desk with a different wall is a different desk.
+ * le.seo's own ground. Not a tuiparts token, and not negotiable at runtime:
+ * a tree under a different wall is a different tree.
  */
 export interface Wall {
   ink: ColorInput
@@ -70,28 +70,32 @@ export interface Wall {
   pinkInk: ColorInput
   pinkDeep: ColorInput
   night: ColorInput
-  gold: ColorInput
-  goldSoft: ColorInput
+  lilac: ColorInput
+  lilacSoft: ColorInput
+  mint: ColorInput
+  butter: ColorInput
 }
 
 export const WALL: Wall = {
-  ink: '#2E4A5F',
-  inkDeep: '#263F52',
-  panel: '#223949',
-  panel2: '#1B2F3E',
-  line: '#6E92A8',
-  lineSoft: '#4E6E82',
-  smoke: '#EDF2F4',
-  smokeDim: '#C3D1DA',
-  pink: '#FF2E88',
-  pinkInk: '#FF94C1',
-  pinkDeep: '#C41A63',
-  night: '#12202B',
-  gold: '#C9A45C',
-  goldSoft: '#E0C48C',
+  ink: '#241634',
+  inkDeep: '#1A0E29',
+  panel: '#2E1B45',
+  panel2: '#190D27',
+  line: '#7B5A9E',
+  lineSoft: '#523670',
+  smoke: '#F6EDFB',
+  smokeDim: '#CFBAE4',
+  pink: '#EA0C79',
+  pinkInk: '#FF8AC9',
+  pinkDeep: '#A3084F',
+  night: '#0F0519',
+  lilac: '#A98CFF',
+  lilacSoft: '#EADFFF',
+  mint: '#9BE3C4',
+  butter: '#F2D48A',
 }
 
-/** The default: a wall with grain, and one hot accent. */
+/** The default: a violet wall with grain, and one dark-pink accent. */
 const DESK: Tokens = {
   colors: {
     background: WALL.ink,
@@ -104,9 +108,9 @@ const DESK: Tokens = {
     primaryForeground: WALL.night,
     destructive: WALL.pinkDeep,
     destructiveForeground: WALL.smoke,
-    success: WALL.goldSoft,
+    success: WALL.mint,
     successForeground: WALL.night,
-    warning: WALL.gold,
+    warning: WALL.butter,
     warningForeground: WALL.night,
     disabled: WALL.lineSoft,
     disabledForeground: WALL.smokeDim,
@@ -122,7 +126,7 @@ const DESK: Tokens = {
 }
 
 /**
- * The same desk with the grain turned down and the accent reserved for the
+ * The same tree with the grain turned down and the accent reserved for the
  * held state. Registered, so the toggle in the footer is a real theme switch
  * and not a class name.
  */

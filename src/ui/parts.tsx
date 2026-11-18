@@ -133,7 +133,7 @@ export function Badge({
   className = '',
 }: {
   label: string
-  intent?: 'neutral' | 'accent' | 'muted'
+  intent?: 'neutral' | 'accent' | 'muted' | 'mint' | 'butter' | 'lilac'
   className?: string
 }) {
   return <span className={`badge badge--${intent} ${className}`}>{label}</span>

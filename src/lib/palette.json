@@ -1,77 +1,89 @@
 {
-  "name": "le.ad",
-  "note": "Muted steelblue wall, gold grain, white smoke, one sharp hot pink. Every ink here is measured by scripts/contrast.mjs; a colour that is not on this list is not on the site.",
+  "name": "le.seo",
+  "note": "Gothic easter: an aubergine crypt, lilac-white incense, one dark-pink punch, and pastel egg chips. Every ink here is measured by scripts/contrast.mjs; a colour that is not on this list is not on the site.",
   "tokens": [
     {
       "name": "ink",
-      "hex": "#2E4A5F",
-      "role": "the wall \u2014 page background"
+      "hex": "#241634",
+      "role": "the wall \u2014 aubergine nave"
     },
     {
       "name": "ink-deep",
-      "hex": "#263F52",
+      "hex": "#1A0E29",
       "role": "recessed band"
     },
     {
       "name": "panel",
-      "hex": "#223949",
-      "role": "panel ground, darker than the wall"
+      "hex": "#2E1B45",
+      "role": "panel ground, a violet stone"
     },
     {
       "name": "panel-2",
-      "hex": "#1B2F3E",
-      "role": "input well, deepest ground"
+      "hex": "#190D27",
+      "role": "input well, the crypt floor"
     },
     {
       "name": "line",
-      "hex": "#6E92A8",
-      "role": "hairline rule"
+      "hex": "#7B5A9E",
+      "role": "hairline rule, lit violet"
     },
     {
       "name": "line-soft",
-      "hex": "#4E6E82",
+      "hex": "#523670",
       "role": "quiet rule"
     },
     {
       "name": "smoke",
-      "hex": "#EDF2F4",
-      "role": "body text"
+      "hex": "#F6EDFB",
+      "role": "body text \u2014 lilac-white incense"
     },
     {
       "name": "smoke-dim",
-      "hex": "#C3D1DA",
+      "hex": "#CFBAE4",
       "role": "secondary text"
     },
     {
       "name": "pink",
-      "hex": "#FF2E88",
+      "hex": "#EA0C79",
       "role": "accent fill \u2014 a solid, never a small glyph"
     },
     {
       "name": "pink-ink",
-      "hex": "#FF94C1",
+      "hex": "#FF8AC9",
       "role": "accent as ink: links, marks, focus"
     },
     {
       "name": "pink-deep",
-      "hex": "#C41A63",
+      "hex": "#A3084F",
       "role": "accent pressed"
     },
     {
       "name": "night",
-      "hex": "#12202B",
+      "hex": "#0F0519",
       "role": "text on the accent fill"
     },
     {
-      "name": "gold",
-      "hex": "#C9A45C",
-      "role": "gold grain, decorative",
+      "name": "lilac",
+      "hex": "#A98CFF",
+      "role": "lilac grain, decorative",
       "decorative": true
     },
     {
-      "name": "gold-soft",
-      "hex": "#E0C48C",
-      "role": "gold grain, lighter, decorative",
+      "name": "lilac-soft",
+      "hex": "#EADFFF",
+      "role": "pale lilac, decorative",
+      "decorative": true
+    },
+    {
+      "name": "mint",
+      "hex": "#9BE3C4",
+      "role": "easter egg mint, decorative",
+      "decorative": true
+    },
+    {
+      "name": "butter",
+      "hex": "#F2D48A",
+      "role": "easter egg butter, decorative",
       "decorative": true
     }
   ],
@@ -149,9 +161,21 @@
     },
     {
       "fg": "night",
-      "bg": "gold-soft",
+      "bg": "lilac-soft",
       "min": 7,
-      "note": "label on a gold chip"
+      "note": "label on a lilac chip"
+    },
+    {
+      "fg": "night",
+      "bg": "mint",
+      "min": 7,
+      "note": "label on a mint chip"
+    },
+    {
+      "fg": "night",
+      "bg": "butter",
+      "min": 7,
+      "note": "label on a butter chip"
     }
   ]
 }

@@ -1,26 +1,30 @@
 /* ==========================================================================
-   le.ad — the wall
+   le.seo — the wall
    --------------------------------------------------------------------------
-   The tokens are declared once, here, and scripts/tokens.mjs refuses a build
-   where they disagree with src/lib/palette.json. A colour that is not in that
-   file is not a colour this site may paint.
+   Gothic easter: an aubergine crypt, lilac-white incense, one dark-pink punch
+   and pastel egg chips. The tokens are declared once, here, and
+   scripts/tokens.mjs refuses a build where they disagree with
+   src/lib/palette.json. A colour that is not in that file is not a colour this
+   site may paint.
    ========================================================================== */
 
 :root {
-  --le-ink: #2E4A5F;
-  --le-ink-deep: #263F52;
-  --le-panel: #223949;
-  --le-panel-2: #1B2F3E;
-  --le-line: #6E92A8;
-  --le-line-soft: #4E6E82;
-  --le-smoke: #EDF2F4;
-  --le-smoke-dim: #C3D1DA;
-  --le-pink: #FF2E88;
-  --le-pink-ink: #FF94C1;
-  --le-pink-deep: #C41A63;
-  --le-night: #12202B;
-  --le-gold: #C9A45C;
-  --le-gold-soft: #E0C48C;
+  --le-ink: #241634;
+  --le-ink-deep: #1A0E29;
+  --le-panel: #2E1B45;
+  --le-panel-2: #190D27;
+  --le-line: #7B5A9E;
+  --le-line-soft: #523670;
+  --le-smoke: #F6EDFB;
+  --le-smoke-dim: #CFBAE4;
+  --le-pink: #EA0C79;
+  --le-pink-ink: #FF8AC9;
+  --le-pink-deep: #A3084F;
+  --le-night: #0F0519;
+  --le-lilac: #A98CFF;
+  --le-lilac-soft: #EADFFF;
+  --le-mint: #9BE3C4;
+  --le-butter: #F2D48A;
 
   --le-mono: ui-monospace, "SFMono-Regular", "IBM Plex Mono", "Cascadia Mono",
     Menlo, Consolas, monospace;
@@ -55,19 +59,21 @@ body {
   line-height: 1.6;
   color: var(--le-smoke);
   background-color: var(--le-ink);
-  /* The wall: a gold wash in the far corner, a cold bloom in the middle, and
-     no second bright edge anywhere. The contrast is diffused before any ink
-     is painted on it. */
+  /* The wall: a lilac window high on the right, a mint Easter light low on the
+     left, and a dark-pink underlight along the floor. Three soft lights, no
+     second bright edge, so the contrast is diffused before any ink is painted
+     on it. */
   background-image:
-    radial-gradient(120% 80% at 82% -10%, rgba(201, 164, 92, 0.22), transparent 58%),
-    radial-gradient(90% 70% at 8% 108%, rgba(237, 242, 244, 0.07), transparent 62%),
-    linear-gradient(180deg, #2b465b 0%, var(--le-ink) 42%, #2a4557 100%);
+    radial-gradient(120% 85% at 84% -8%, rgba(169, 140, 255, 0.26), transparent 58%),
+    radial-gradient(86% 64% at 4% 106%, rgba(155, 227, 196, 0.13), transparent 62%),
+    radial-gradient(80% 52% at 52% 118%, rgba(234, 12, 121, 0.18), transparent 60%),
+    linear-gradient(180deg, #2d1a40 0%, var(--le-ink) 46%, #2a173a 100%);
   background-attachment: fixed;
   overflow-x: hidden;
 }
 
-/* Gold grain: fractal noise tinted gold, laid over the wash at a strength you
-   notice only when it is gone. */
+/* Lilac grain: fractal noise tinted violet, laid over the wash at a strength
+   you notice only when it is gone. */
 body::before {
   content: "";
   position: fixed;
@@ -76,11 +82,11 @@ body::before {
   pointer-events: none;
   opacity: 0.62;
   mix-blend-mode: soft-light;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.62' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.788 0 0 0 0 0.643 0 0 0 0 0.361 0 0 0 0.85 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.62' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.663 0 0 0 0 0.549 0 0 0 0 1 0 0 0 0.85 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23g)'/%3E%3C/svg%3E");
   background-size: 220px 220px;
 }
 
-/* A finer, colder grain on top, so the gold does not read as a flat tint. */
+/* A finer, colder grain on top, so the lilac does not read as a flat tint. */
 body::after {
   content: "";
   position: fixed;
@@ -100,8 +106,9 @@ body::after {
 }
 
 /* --- smoke ---------------------------------------------------------------
-   White smoke, not white light. Three puffs of a cold radial gradient behind
-   a heavy blur, drifting a few pixels. It sits under the ink, never over it. */
+   Incense, not light. Three puffs of a lilac-white radial gradient behind a
+   heavy blur, drifting a few pixels like a gothic-easter nave. It sits under
+   the ink, never over it. */
 
 .smoke {
   position: fixed;
@@ -118,8 +125,8 @@ body::after {
   filter: blur(72px);
   background: radial-gradient(
     circle at 50% 50%,
-    rgba(237, 242, 244, 0.16),
-    rgba(237, 242, 244, 0.05) 45%,
+    rgba(246, 237, 251, 0.17),
+    rgba(246, 237, 251, 0.05) 45%,
     transparent 70%
   );
   animation: drift 64s ease-in-out infinite alternate;

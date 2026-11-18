@@ -2,7 +2,7 @@
 /**
  * The palette gate, and the ink audit.
  *
- * Adapted from le.gume: the same gate, reading le.ad's palette and ink names.
+ * Adapted from le.gume: the same gate, reading le.seo's palette and ink names.
  * `src/lib/palette.json` declares the pairs the site actually paints and the
  * minimum each must clear. The colour page renders the same numbers, so the
  * page and the build cannot disagree about what passes.
@@ -136,7 +136,7 @@ for (let i = 0; i < series.length; i += 1) {
 
 // --- 3. the ink audit, read from what shipped ------------------------------
 const TOKEN_CLASS =
-  /\btext-(ink-deep|ink|panel-2|panel|line-soft|line|smoke-dim|smoke|pink-ink|pink-deep|pink|night|gold-soft|gold)(?:\/(\d+))?\b/g
+  /\btext-(ink-deep|ink|panel-2|panel|line-soft|line|smoke-dim|smoke|pink-ink|pink-deep|pink|night|lilac-soft|lilac|mint|butter)(?:\/(\d+))?\b/g
 
 const paints = (attrs) => attrs.some(([, value]) => value === 'currentColor')
 
