@@ -60,6 +60,41 @@ const fetchText = async (url) => {
   return { status: response.status, ok: response.ok, body: response.ok ? await response.text() : '' }
 }
 
+const FAMILY_HOST = 'james-gibson.github.io'
+
+/** A href with no scheme is resolved against the origin, not the site. */
+const implicit = (raw) => raw.startsWith('/') || !/^[a-z][a-z0-9+.-]*:/i.test(raw)
+
+const under = (path, mount) => {
+  const p = path.replace(/\/$/, '')
+  const m = mount.replace(/\/$/, '')
+  return p === m || p.startsWith(`${m}/`)
+}
+
+const sibling = (path, mount, mounts) =>
+  [...mounts.keys()].some((candidate) => candidate !== mount && under(path, candidate))
+
+/** The defect class: an implicit link that resolves outside every seed we name. */
+const escapes = (raw, path, mount, mounts) => implicit(raw) && !under(path, mount) && !sibling(path, mount, mounts)
+
+// The rule tests itself before it tests the world: the exact href that shipped
+// from le.stalk, and the three cases that must stay legal.
+{
+  const mounts = new Map([['/le.gume/', 'le.gume']])
+  const cases = [
+    ['/collections/', '/collections/', true, 'the le.stalk defect'],
+    ['/le.stalk/collections/', '/le.stalk/collections/', false, 'a mounted path'],
+    ['/le.gume/', '/le.gume/', false, 'a root-absolute link to a sibling seed'],
+    ['https://example.org/x/', '/x/', false, 'an explicit absolute link'],
+  ]
+  for (const [raw, path, want, label] of cases) {
+    if (escapes(raw, path, '/le.stalk/', mounts) !== want) {
+      console.error(`doors: self-test failed — ${label} (${raw})`)
+      process.exit(1)
+    }
+  }
+}
+
 /** The links a page offers, resolved, with the raw href for the report. */
 const linksOn = (html, base) => {
   const seen = new Map()
@@ -77,8 +112,6 @@ const linksOn = (html, base) => {
   }
   return [...seen.entries()].slice(0, MAX_LINKS)
 }
-
-const FAMILY_HOST = 'james-gibson.github.io'
 
 // Every mount in the register, so a link to a sibling seed is not mistaken for
 // a link that has wandered off the site.
@@ -137,14 +170,7 @@ for (const destination of destinations) {
     // silently assumes the site is mounted at /. That is the defect class this
     // check exists for. An explicit absolute URL is a deliberate link and may
     // point at a sibling seed.
-    const implicit = raw.startsWith('/') || !/^[a-z][a-z0-9+.-]*:/i.test(raw)
-    const localPath = path.replace(/\/$/, '')
-    const localMount = mount.replace(/\/$/, '')
-    const sibling = [...mounts.keys()].some((candidate) => {
-      const other = candidate.replace(/\/$/, '')
-      return other !== localMount && localPath === other
-    })
-    if (implicit && localPath !== localMount && !localPath.startsWith(`${localMount}/`) && !sibling) {
+    if (escapes(raw, path, mount, mounts)) {
       problems.push(`${raw} is written from the origin, not the mount ${mount}`)
       continue
     }
