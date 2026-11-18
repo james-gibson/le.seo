@@ -268,6 +268,12 @@ const linkIds = [...treeSource.matchAll(/^\s{4}id: '([a-z0-9-]+)',/gm)].map((m) 
 if (linkUrls.length < 6) fail('links', `the register has ${linkUrls.length} destinations — that is not a collection`)
 for (const url of linkUrls) {
   if (!url.startsWith('https://')) fail('links', `${url} is not https`)
+  // A tree is a list of places to go next. The site you are reading is where
+  // you already are: listing it inflates the set, pads the order, and tells a
+  // reader to open the page under their own feet.
+  if (selfCard.live && url.replace(/\/$/, '') === selfCard.live.replace(/\/$/, '')) {
+    fail('links', `${url} is this site — a destination is somewhere else`)
+  }
 }
 if (new Set(linkIds).size !== linkIds.length) fail('links', 'the register repeats an id')
 

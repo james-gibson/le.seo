@@ -96,17 +96,6 @@ export const LINKS: Link[] = [
     rung: 2,
   },
   {
-    id: 'le.seo',
-    name: 'le.seo',
-    url: 'https://james-gibson.github.io/le.seo',
-    card: 'https://james-gibson.github.io/le.seo/seed.json',
-    pitch: 'A short, ordered tree of the family — chosen for who you are and what you came to do.',
-    kind: 'seed',
-    voices: ['reader', 'grower', 'maintainer', 'packager'],
-    goals: ['try', 'verify'],
-    rung: 1,
-  },
-  {
     id: 'le.plot',
     name: 'le.plot',
     url: 'https://james-gibson.github.io/le.plot',

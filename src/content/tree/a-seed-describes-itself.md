@@ -47,8 +47,10 @@ site cannot disagree about a string.
 
 ## How a consumer uses it
 
-`le.seo` quotes two cards today — its own and `le.ad`'s — and falls back to its register's one-line
-copy for the rest. **Vendored, not fetched**: the build is offline and stays offline.
+`le.seo` quotes one card today — `le.ad`'s — and publishes its own at `/seed.json` for other sites to
+quote. It does not quote itself: a destination is somewhere a reader can go, and the page under
+their feet is not one. The register falls back to its one-line copy for everything else.
+**Vendored, not fetched**: the build is offline and stays offline.
 
 The copy is pinned by `scripts/cards.mjs`, which re-fetches every card the register names and
 compares it with `src/cards/<id>.json`:
@@ -83,8 +85,10 @@ end on: length, a banned list of superlatives, a full stop, no sentence that sta
   cannot quietly make it better than the truth.
 - **A stale quote is a build failure.** The check compares content, not the `generated` date, so a
   rebuild of the same seed does not churn a diff, but an edited pitch does.
-- **A card is a start, not a substitute.** Twelve destinations and two cards is the honest state;
-  the rest publish a one-line pitch in this register until they publish their own.
+- **A card is a start, not a substitute.** Twelve destinations and one quoted card is the honest
+  state; the rest publish a one-line pitch in this register until they publish their own.
+- **A site does not list itself.** The seed publishes a card so other sites can quote it; quoting it
+  back to a reader who is already here is a row that can only be a no-op.
 
 ## What it costs
 

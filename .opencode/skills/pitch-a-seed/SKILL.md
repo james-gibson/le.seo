@@ -65,6 +65,8 @@ One sentence may serve two voices only if it answers both questions without hedg
 - **No numbers the card does not carry.** "Six desks" is in the card; "the fastest" is not.
 - **The order is not yours.** Readiness then name; if a destination needs to be first, change its
   `rung` and say why — that is a claim about its front door, not about the copy.
+- **Never register the site you are writing for.** A tree is a list of places to go next; the page a
+  reader is standing on is not one. The seed's own card is published so *other* sites can quote it.
 
 ## Steps
 

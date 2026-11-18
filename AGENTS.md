@@ -43,6 +43,8 @@ npm run isotope      # re-derive the isotope id
 - A tree never comes back empty: fall back to the voice, then to everything, and say which.
 - Every `/v/<voice>/<goal>` pair is prerendered. A tree is a 200, not a query.
 - A destination's URL is https; the guard refuses the rest.
+- A site does not list itself. The seed publishes `/seed.json` for others to quote; its own register
+  starts somewhere else, and the guard refuses a row pointing at this origin.
 - The isotope id on `/isotope/giardiniera` is content-addressed. If the feature changes, the page
   changes, or the build stops.
 - The manifest is **generated**, never copied from another seed: `name` comes from
