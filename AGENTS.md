@@ -33,6 +33,8 @@ npm run smoke        # render every route on the server
 npm run check:tree   # the isotope's ten scenarios, executed
 npm run cards        # vendor the cards the register names
 npm run cards:check  # fail when a seed has moved
+npm run manifest     # app title, theme colour and icons, from the card and the wall
+npm run icons        # draw the PNG icons and the tab SVG from the palette
 npm run isotope      # re-derive the isotope id
 ```
 
@@ -43,3 +45,6 @@ npm run isotope      # re-derive the isotope id
 - A destination's URL is https; the guard refuses the rest.
 - The isotope id on `/isotope/giardiniera` is content-addressed. If the feature changes, the page
   changes, or the build stops.
+- The manifest is **generated**, never copied from another seed: `name` comes from
+  `self-card.json`, `theme_color` from `palette.json`, and every icon it names must exist. The
+  guard checks all three, plus the `theme-color` and pre-stylesheet background in `index.html`.

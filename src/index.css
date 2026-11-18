@@ -84,48 +84,10 @@
 }
 
 .brand__mark {
-  position: relative;
-  display: inline-block;
+  display: block;
+  flex: 0 0 auto;
   width: 22px;
-  height: 18px;
-}
-
-.brand__desk {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 3px;
-  height: 1px;
-  background: var(--le-line);
-}
-
-.brand__desk::before,
-.brand__desk::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  width: 1px;
-  height: 5px;
-  background: var(--le-line);
-}
-
-.brand__desk::before {
-  left: 2px;
-}
-
-.brand__desk::after {
-  right: 2px;
-}
-
-.brand__lamp {
-  position: absolute;
-  right: 6px;
-  top: 0;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--le-pink);
-  box-shadow: 0 0 10px 1px color-mix(in srgb, var(--le-pink) 60%, transparent);
+  height: 22px;
 }
 
 .brand__name {

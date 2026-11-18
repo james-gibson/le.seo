@@ -1,0 +1,61 @@
+{
+  "id": "/le.seo/",
+  "name": "le.seo — pick a tree",
+  "short_name": "le.seo",
+  "description": "Marketing optimisation for a collection of seeds: one voice, one goal, one ordered tree of links.",
+  "lang": "en",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "orientation": "any",
+  "background_color": "#241634",
+  "theme_color": "#241634",
+  "categories": [
+    "business",
+    "productivity",
+    "developer"
+  ],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "reader · try",
+      "short_name": "reader",
+      "url": "./v/reader/try/"
+    },
+    {
+      "name": "grower · adopt",
+      "short_name": "grower",
+      "url": "./v/grower/adopt/"
+    }
+  ]
+}

@@ -202,6 +202,64 @@ for (const file of vendored) {
 }
 notes.push(`${vendored.length} vendored card(s)`)
 
+// --- 7c. the install metadata is this site's, not the seed it was cut from
+// An installed app's title is the manifest's `name`, and its title bar is
+// `theme_color`. Both were le.ad's when this site was copied, and the manifest
+// itself was never copied at all. So: the manifest exists, it agrees with the
+// card and the wall, every icon it names is on disk, and the document that
+// links it paints the same wall before the stylesheet lands.
+const palette = JSON.parse(await readText('src/lib/palette.json').catch(() => '{}'))
+const ink = palette.tokens?.find((token) => token.name === 'ink')?.hex
+const distManifestText = await readText(join(DIST, 'manifest.json')).catch(() => '')
+if (!distManifestText) {
+  fail('manifest', 'dist/manifest.json is missing — an installable site has an app title')
+} else {
+  try {
+    const manifest = JSON.parse(distManifestText)
+    if (manifest.short_name !== selfCard.preferred) {
+      fail('manifest', `short_name is "${manifest.short_name}", not "${selfCard.preferred}"`)
+    }
+    if (!manifest.name?.startsWith(selfCard.name)) {
+      fail('manifest', `name "${manifest.name}" does not start with "${selfCard.name}"`)
+    }
+    if (manifest.description !== selfCard.description) {
+      fail('manifest', 'description disagrees with src/lib/self-card.json')
+    }
+    if (ink && manifest.theme_color?.toUpperCase() !== ink.toUpperCase()) {
+      fail('manifest', `theme_color is ${manifest.theme_color}, not the wall's ${ink}`)
+    }
+    if (ink && manifest.background_color?.toUpperCase() !== ink.toUpperCase()) {
+      fail('manifest', `background_color is ${manifest.background_color}, not the wall's ${ink}`)
+    }
+    for (const icon of manifest.icons ?? []) {
+      try {
+        await readText(join(DIST, icon.src))
+      } catch {
+        fail('manifest', `icon ${icon.src} is named in the manifest but not in dist/`)
+      }
+    }
+    for (const shortcut of manifest.shortcuts ?? []) {
+      const route = shortcut.url.replace(/^\.\//, '').replace(/\/$/, '')
+      try {
+        await readText(join(DIST, route, 'index.html'))
+      } catch {
+        fail('manifest', `shortcut ${shortcut.url} has no prerendered shell`)
+      }
+    }
+  } catch (error) {
+    fail('manifest', `dist/manifest.json is not JSON: ${error.message}`)
+  }
+}
+
+const distIndex = await readText(join(DIST, 'index.html')).catch(() => '')
+if (!/rel="manifest"/.test(distIndex)) fail('manifest', 'dist/index.html does not link the manifest')
+if (ink && !distIndex.includes(`content="${ink}"`)) {
+  fail('manifest', `dist/index.html does not declare theme-color ${ink}`)
+}
+if (/2E4A5F|C9A45C|FF2E88/i.test(distIndex)) {
+  fail('manifest', 'dist/index.html still paints a colour from le.ad\'s palette')
+}
+
 // --- 8. every destination is https and unique ----------------------------
 // The register is the one thing a reader acts on, so a typo in a URL is a dead
 // pitch shipped to everyone.
