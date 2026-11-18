@@ -96,6 +96,17 @@ export const LINKS: Link[] = [
     rung: 2,
   },
   {
+    id: 'le.stalk',
+    name: 'le.stalk',
+    url: 'https://james-gibson.github.io/le.stalk',
+    card: 'https://james-gibson.github.io/le.stalk/seed.json',
+    pitch: 'Collections as predicates, bills of materials in three layers, and the lineage graph with its gaps named.',
+    kind: 'seed',
+    voices: ['reader', 'grower', 'maintainer', 'packager'],
+    goals: ['try', 'verify'],
+    rung: 1,
+  },
+  {
     id: 'le.plot',
     name: 'le.plot',
     url: 'https://james-gibson.github.io/le.plot',
