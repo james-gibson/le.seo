@@ -271,23 +271,33 @@ for (const url of linkUrls) {
 }
 if (new Set(linkIds).size !== linkIds.length) fail('links', 'the register repeats an id')
 
-// --- 9. the isotope page and the feature file agree ---------------------
-const isotopePage = await readText('src/content/isotope/giardiniera.md').catch(() => '')
-const isotopeId = /^isotope\s+(\S+)$/m.exec(isotopePage)?.[1]
-if (!isotopeId) fail('isotope', 'the isotope page does not print an isotope id')
-else {
+// --- 9. every isotope page and its feature file agree --------------------
+// A protocol page that drifts from its specification is a rumour. There is now
+// more than one isotope here, so the check derives as many ids as there are
+// pages rather than trusting a single hard-coded slug.
+const isotopeDir = join('src', 'content', 'isotope')
+const isotopePages = (await readdir(isotopeDir).catch(() => [])).filter((name) => name.endsWith('.md'))
+if (!isotopePages.length) fail('isotope', 'src/content/isotope holds no pages')
+for (const name of isotopePages) {
+  const slug = name.replace(/\.md$/, '')
+  const page = join(isotopeDir, name)
+  const source = await readText(page).catch(() => '')
+  const printed = /^isotope\s+(\S+)$/m.exec(source)?.[1]
+  if (!printed) {
+    fail('isotope', `${page} does not print an isotope id`)
+    continue
+  }
+  const feature = join('features', `${slug}.feature`)
   try {
-    const report = execFileSync('python3', ['scripts/validate-spec.py', 'features/giardiniera.feature'], {
-      encoding: 'utf8',
-    })
+    const report = execFileSync('python3', ['scripts/validate-spec.py', feature], { encoding: 'utf8' })
     const derived = /isotope\s+(\S+)/.exec(report)?.[1]
-    if (!derived) fail('isotope', 'the canon reported no isotope id')
-    else if (derived !== isotopeId) {
-      fail('isotope', `the page prints ${isotopeId} but the feature derives ${derived}`)
-    } else notes.push(`isotope ${derived.slice(0, 12)}…`)
+    if (!derived) fail('isotope', `the canon reported no isotope id for ${slug}`)
+    else if (derived !== printed) {
+      fail('isotope', `${page} prints ${printed} but ${feature} derives ${derived}`)
+    } else notes.push(`${slug} ${derived.slice(0, 10)}…`)
   } catch (error) {
-    if (error.status === 2) notes.push('isotope id NOT re-derived here (the canon is not installed)')
-    else fail('isotope', `the canon could not read the feature: ${error.message.slice(0, 120)}`)
+    if (error.status === 2) notes.push(`${slug} id NOT re-derived here (the canon is not installed)`)
+    else fail('isotope', `the canon could not read ${feature}: ${String(error.message).slice(0, 120)}`)
   }
 }
 

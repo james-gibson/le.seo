@@ -8,7 +8,7 @@
   "license": "AGPL-3.0-only",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/seed-card.mjs && node scripts/icons.mjs && node scripts/manifest.mjs && node scripts/copy.mjs && tsc --noEmit && node scripts/tokens.mjs && vite build && vite build --ssr scripts/prerender.tsx --outDir .prerender --emptyOutDir && node .prerender/prerender.js && node scripts/postbuild.mjs && node scripts/contrast.mjs && node scripts/a11y.mjs dist --fail-on high && node scripts/overflow.mjs && npm run check:tree && node scripts/verify-publish.mjs",
+    "build": "node scripts/seed-card.mjs && node scripts/icons.mjs && node scripts/manifest.mjs && node scripts/copy.mjs && tsc --noEmit && node scripts/tokens.mjs && vite build && vite build --ssr scripts/prerender.tsx --outDir .prerender --emptyOutDir && node .prerender/prerender.js && node scripts/postbuild.mjs && node scripts/contrast.mjs && node scripts/a11y.mjs dist --fail-on high && node scripts/overflow.mjs && npm run check:tree && npm run check:manifest && node scripts/verify-publish.mjs",
     "preview": "vite preview --base=/le.seo/",
     "smoke": "vite build --ssr scripts/smoke.tsx --outDir .smoke --emptyOutDir && node .smoke/smoke.js",
     "check": "tsc --noEmit",
@@ -21,7 +21,8 @@
     "cards:check": "node scripts/cards.mjs --check",
     "copy": "node scripts/copy.mjs",
     "icons": "node scripts/icons.mjs",
-    "manifest": "node scripts/manifest.mjs"
+    "manifest": "node scripts/manifest.mjs",
+    "check:manifest": "vite build --ssr scripts/manifest-check.ts --outDir .check-manifest --emptyOutDir && node .check-manifest/manifest-check.js"
   },
   "dependencies": {
     "react": "19.3.1",

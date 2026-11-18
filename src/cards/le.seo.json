@@ -30,7 +30,8 @@
   "ships": [
     "silverskin",
     "cornichon",
-    "giardiniera"
+    "giardiniera",
+    "pickled-egg"
   ],
   "builtFrom": [
     "silverskin",

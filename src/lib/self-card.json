@@ -10,13 +10,31 @@
   "rung": 1,
   "description": "Marketing optimisation for a collection of seeds: one voice, one goal, one ordered tree of links.",
   "pitches": {
-    "reader": "A short, ordered tree of the family — chosen for who you are and what you came to do.",
+    "reader": "A short, ordered tree of the family \u2014 chosen for who you are and what you came to do.",
     "grower": "The tree that says which start to install, in the order a grower should meet them.",
     "maintainer": "Every destination carries a voice, a goal and a rung, and the order is a stated rule.",
     "packager": "The giardiniera isotope: an assortment served in one order, and the address is the pitch."
   },
-  "voices": ["reader", "grower", "maintainer", "packager"],
-  "goals": ["try", "adopt", "verify", "fund"],
-  "ships": ["silverskin", "cornichon", "giardiniera"],
-  "builtFrom": ["silverskin", "cornichon"]
+  "voices": [
+    "reader",
+    "grower",
+    "maintainer",
+    "packager"
+  ],
+  "goals": [
+    "try",
+    "adopt",
+    "verify",
+    "fund"
+  ],
+  "ships": [
+    "silverskin",
+    "cornichon",
+    "giardiniera",
+    "pickled-egg"
+  ],
+  "builtFrom": [
+    "silverskin",
+    "cornichon"
+  ]
 }
