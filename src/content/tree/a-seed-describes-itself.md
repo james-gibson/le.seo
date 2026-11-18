@@ -85,7 +85,7 @@ end on: length, a banned list of superlatives, a full stop, no sentence that sta
   cannot quietly make it better than the truth.
 - **A stale quote is a build failure.** The check compares content, not the `generated` date, so a
   rebuild of the same seed does not churn a diff, but an edited pitch does.
-- **A card is a start, not a substitute.** Twelve destinations and one quoted card is the honest
+- **A card is a start, not a substitute.** Thirteen destinations and two quoted cards is the honest
   state; the rest publish a one-line pitch in this register until they publish their own.
 - **A site does not list itself.** The seed publishes a card so other sites can quote it; quoting it
   back to a reader who is already here is a row that can only be a no-op.
