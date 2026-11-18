@@ -55,6 +55,8 @@ export const GOALS = [
 
 export type Goal = (typeof GOALS)[number]['id']
 
+import { pitchFor } from './cards'
+
 export type LinkKind = 'seed' | 'site' | 'isotope' | 'lab' | 'project'
 
 export type Link = {
@@ -62,8 +64,13 @@ export type Link = {
   name: string
   /** absolute, https, no trailing slash unless the host needs one */
   url: string
-  /** one line: what this is, for this reader */
+  /**
+   * One line: what this is. A fallback — if the seed publishes a card, the
+   * card's pitch for this voice wins, because the seed owns its own copy.
+   */
   pitch: string
+  /** the seed's own /seed.json, when it publishes one */
+  card?: string
   kind: LinkKind
   voices: Voice[]
   goals: Goal[]
@@ -89,6 +96,17 @@ export const LINKS: Link[] = [
     rung: 2,
   },
   {
+    id: 'le.seo',
+    name: 'le.seo',
+    url: 'https://james-gibson.github.io/le.seo',
+    card: 'https://james-gibson.github.io/le.seo/seed.json',
+    pitch: 'A short, ordered tree of the family — chosen for who you are and what you came to do.',
+    kind: 'seed',
+    voices: ['reader', 'grower', 'maintainer', 'packager'],
+    goals: ['try', 'verify'],
+    rung: 1,
+  },
+  {
     id: 'le.plot',
     name: 'le.plot',
     url: 'https://james-gibson.github.io/le.plot',
@@ -102,6 +120,7 @@ export const LINKS: Link[] = [
     id: 'le.ad',
     name: 'le.ad',
     url: 'https://james-gibson.github.io/le.ad',
+    card: 'https://james-gibson.github.io/le.ad/seed.json',
     pitch: 'An empty hot desk: six desks, one claim at a time, a lease that returns them.',
     kind: 'seed',
     voices: ['reader', 'packager'],
@@ -211,10 +230,13 @@ export function isGoal(value: string | undefined): value is Goal {
   return !!value && GOALS.some((goal) => goal.id === value)
 }
 
+/** A link as it appears in a tree: the seed's own pitch, if it published one. */
+export type TreeLink = Link & { pitch: string }
+
 export type Tree = {
   voice: Voice
   goal: Goal
-  links: Link[]
+  links: TreeLink[]
   /**
    * How the set was chosen: `exact` when at least one row answers both
    * questions, `voice` when the goal has no match and the tree falls back to
@@ -229,14 +251,20 @@ function order(a: Link, b: Link): number {
   return a.rung - b.rung || a.name.localeCompare(b.name)
 }
 
+function resolve(links: Link[], voice: Voice): TreeLink[] {
+  return links
+    .sort(order)
+    .map((link) => ({ ...link, pitch: pitchFor(link, voice) }))
+}
+
 export function tree(voice: Voice, goal: Goal, links: Link[] = LINKS): Tree {
   const exact = links.filter((link) => link.voices.includes(voice) && link.goals.includes(goal))
-  if (exact.length) return { voice, goal, links: [...exact].sort(order), basis: 'exact' }
+  if (exact.length) return { voice, goal, links: resolve(exact, voice), basis: 'exact' }
 
   const byVoice = links.filter((link) => link.voices.includes(voice))
-  if (byVoice.length) return { voice, goal, links: [...byVoice].sort(order), basis: 'voice' }
+  if (byVoice.length) return { voice, goal, links: resolve(byVoice, voice), basis: 'voice' }
 
-  return { voice, goal, links: [...links].sort(order), basis: 'all' }
+  return { voice, goal, links: resolve([...links], voice), basis: 'all' }
 }
 
 /**

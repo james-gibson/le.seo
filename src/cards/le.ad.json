@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "id": "le.ad",
+  "name": "le.ad",
+  "preferred": "le.ad",
+  "verb": "take a desk",
+  "kind": "seed",
+  "live": "https://james-gibson.github.io/le.ad",
+  "repo": "james-gibson/le.ad",
+  "rung": 1,
+  "description": "An empty hot desk: six desks, one claim at a time, and a ninety-second lease that returns them.",
+  "pitches": {
+    "reader": "An empty desk you can take, a lamp that shows the lease, and a link that hands the desk to someone else.",
+    "packager": "The desk-claim isotope: a lease on a connection point, specified, executed, and proposed upstream.",
+    "maintainer": "A seed whose content is a protocol, with three artefacts that have to agree or the build refuses."
+  },
+  "voices": [
+    "reader",
+    "packager",
+    "maintainer"
+  ],
+  "goals": [
+    "try",
+    "verify"
+  ],
+  "ships": [],
+  "builtFrom": [
+    "silverskin"
+  ],
+  "generated": "2026-11-18",
+  "card": "https://james-gibson.github.io/le.ad/seed.json"
+}

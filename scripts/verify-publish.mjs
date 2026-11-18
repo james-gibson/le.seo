@@ -173,6 +173,35 @@ else {
   }
 }
 
+// --- 7b. the seed describes itself, and the copies agree with it ---------
+// A card is the seed's own sentence. If the published card is missing or
+// disagrees with the source, every pitch site quoting it is quoting nothing.
+const selfCard = JSON.parse(await readText('src/lib/self-card.json').catch(() => '{}'))
+const distCard = await readText(join(DIST, 'seed.json')).catch(() => '')
+if (!distCard) {
+  fail('card', 'dist/seed.json is missing — a seed that pitches others must publish its own card')
+} else {
+  try {
+    const card = JSON.parse(distCard)
+    if (card.id !== selfCard.id) fail('card', `dist/seed.json is ${card.id}, not ${selfCard.id}`)
+    if (card.live !== selfCard.live) fail('card', 'dist/seed.json live disagrees with src/lib/self-card.json')
+    if (!card.pitches || !Object.keys(card.pitches).length) fail('card', 'dist/seed.json has no pitches')
+    if (!card.card?.endsWith('/seed.json')) fail('card', 'dist/seed.json does not cite its own address')
+  } catch (error) {
+    fail('card', `dist/seed.json is not JSON: ${error.message}`)
+  }
+}
+
+// A vendored card must name the same origin the register sends a reader to.
+const vendored = await walk('src/cards').catch(() => [])
+for (const file of vendored) {
+  const card = JSON.parse(await readText(file))
+  if (!treeSource.includes(`'${card.live}'`)) {
+    fail('card', `${file} names ${card.live}, which the register does not link`)
+  }
+}
+notes.push(`${vendored.length} vendored card(s)`)
+
 // --- 8. every destination is https and unique ----------------------------
 // The register is the one thing a reader acts on, so a typo in a URL is a dead
 // pitch shipped to everyone.

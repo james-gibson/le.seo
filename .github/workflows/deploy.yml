@@ -27,6 +27,10 @@ jobs:
 
       - run: npm ci
 
+      # A vendored card that no longer matches the seed it quotes is a pitch
+      # that has quietly gone stale. Same trade as a vendored rules.md.
+      - run: npm run cards:check
+
       # tsc --noEmit, vite build, postbuild, and the publish guard.
       # A guard failure stops the deploy here, not in production.
       - run: npm run build

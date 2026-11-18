@@ -1,0 +1,80 @@
+---
+title: A seed describes itself
+description: Every seed publishes /seed.json — its own name, verb and pitch per voice — and a pitch site quotes it instead of writing copy.
+order: 3
+updated: 2026-11-18
+tags: tree, card, self-description
+---
+
+A pitch site has a copy problem: the moment it starts writing sentences about somebody else's
+seed, those sentences are its own invention, and they age without anyone noticing. The fix is the
+one every other claim in this family uses: **let the thing describe itself, and quote it.**
+
+## The card
+
+Every seed publishes `/seed.json` at its origin. This one prints its own:
+
+```json
+{
+  "version": 1,
+  "id": "le.seo",
+  "name": "le.seo",
+  "preferred": "le.seo",
+  "verb": "pick a tree",
+  "kind": "seed",
+  "live": "https://james-gibson.github.io/le.seo",
+  "repo": "james-gibson/le.seo",
+  "rung": 1,
+  "description": "Marketing optimisation for a collection of seeds…",
+  "pitches": {
+    "reader": "A short, ordered tree of the family…",
+    "packager": "The giardiniera isotope: an assortment served in one order…"
+  },
+  "voices": ["reader", "grower", "maintainer", "packager"],
+  "goals": ["try", "adopt", "verify", "fund"],
+  "ships": ["silverskin", "cornichon", "giardiniera"],
+  "builtFrom": ["silverskin", "cornichon"],
+  "card": "https://james-gibson.github.io/le.seo/seed.json"
+}
+```
+
+The field that matters is `pitches`, keyed by **voice**. The same seed says a different true thing
+to a reader than to a packager, and the seed's owner is the only one who can write both. A voice
+with no line is a voice the seed is not pitching to — that is a fact, not an omission.
+
+The card is generated from the same file the page imports, so the published card and the rendered
+site cannot disagree about a string.
+
+## How a consumer uses it
+
+`le.seo` quotes two cards today — its own and `le.ad`'s — and falls back to its register's one-line
+copy for the rest. **Vendored, not fetched**: the build is offline and stays offline.
+
+The copy is pinned by `scripts/cards.mjs`, which re-fetches every card the register names and
+compares it with `src/cards/<id>.json`:
+
+```sh
+npm run cards          # write the vendored copies
+npm run cards:check    # fail when a seed has moved
+```
+
+`cards:check` runs in CI. It is the same trade as a vendored `rules.md`: a copy with a catch-up
+check is a claim that can fail; a fetch at build time would make this build depend on eleven
+origins and would not work on a plane.
+
+## What it changes
+
+- **The copy belongs to the seed.** A pitch site that quotes cannot improve the sentence, and it
+  cannot quietly make it better than the truth.
+- **A stale quote is a build failure.** The check compares content, not the `generated` date, so a
+  rebuild of the same seed does not churn a diff, but an edited pitch does.
+- **A card is a start, not a substitute.** Twelve destinations and two cards is the honest state;
+  the rest publish a one-line pitch in this register until they publish their own.
+
+## What it costs
+
+- **Eleven more repositories to touch.** A card is a new published artefact per seed, and each one
+  needs its own build step and its own guard line.
+- **A check that needs the network.** CI gains a dependency on every card's origin being up. When
+  one is unreachable the check says so rather than pretending the copy is current — but it will
+  fail the build, and that is the point.

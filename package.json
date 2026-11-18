@@ -3,12 +3,12 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "le.seo — marketing optimisation for a collection of seeds. A link tree with one voice and one goal, and the giardiniera isotope.",
+  "description": "le.seo \u2014 marketing optimisation for a collection of seeds. A link tree with one voice and one goal, and the giardiniera isotope.",
   "homepage": "https://james-gibson.github.io/le.seo/",
   "license": "AGPL-3.0-only",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && node scripts/tokens.mjs && vite build && vite build --ssr scripts/prerender.tsx --outDir .prerender --emptyOutDir && node .prerender/prerender.js && node scripts/postbuild.mjs && node scripts/contrast.mjs && node scripts/a11y.mjs dist --fail-on high && node scripts/overflow.mjs && npm run check:tree && node scripts/verify-publish.mjs",
+    "build": "node scripts/seed-card.mjs && tsc --noEmit && node scripts/tokens.mjs && vite build && vite build --ssr scripts/prerender.tsx --outDir .prerender --emptyOutDir && node .prerender/prerender.js && node scripts/postbuild.mjs && node scripts/contrast.mjs && node scripts/a11y.mjs dist --fail-on high && node scripts/overflow.mjs && npm run check:tree && node scripts/verify-publish.mjs",
     "preview": "vite preview --base=/le.seo/",
     "smoke": "vite build --ssr scripts/smoke.tsx --outDir .smoke --emptyOutDir && node .smoke/smoke.js",
     "check": "tsc --noEmit",
@@ -16,7 +16,9 @@
     "overflow": "node scripts/overflow.mjs",
     "guard": "node scripts/verify-publish.mjs",
     "check:tree": "vite build --ssr scripts/tree-check.ts --outDir .check --emptyOutDir && node .check/tree-check.js",
-    "isotope": "python3 scripts/validate-spec.py features/giardiniera.feature --brine \"$HOME/projects/kb/projects/scripts/brine\""
+    "isotope": "python3 scripts/validate-spec.py features/giardiniera.feature --brine \"$HOME/projects/kb/projects/scripts/brine\"",
+    "cards": "node scripts/cards.mjs",
+    "cards:check": "node scripts/cards.mjs --check"
   },
   "dependencies": {
     "react": "19.3.1",
