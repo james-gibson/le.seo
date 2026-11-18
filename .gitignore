@@ -1,0 +1,9 @@
+node_modules
+dist
+dist-ssr
+.prerender
+.smoke
+.DS_Store
+*.local
+.check
+.check

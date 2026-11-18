@@ -1,0 +1,157 @@
+{
+  "name": "le.ad",
+  "note": "Muted steelblue wall, gold grain, white smoke, one sharp hot pink. Every ink here is measured by scripts/contrast.mjs; a colour that is not on this list is not on the site.",
+  "tokens": [
+    {
+      "name": "ink",
+      "hex": "#2E4A5F",
+      "role": "the wall \u2014 page background"
+    },
+    {
+      "name": "ink-deep",
+      "hex": "#263F52",
+      "role": "recessed band"
+    },
+    {
+      "name": "panel",
+      "hex": "#223949",
+      "role": "panel ground, darker than the wall"
+    },
+    {
+      "name": "panel-2",
+      "hex": "#1B2F3E",
+      "role": "input well, deepest ground"
+    },
+    {
+      "name": "line",
+      "hex": "#6E92A8",
+      "role": "hairline rule"
+    },
+    {
+      "name": "line-soft",
+      "hex": "#4E6E82",
+      "role": "quiet rule"
+    },
+    {
+      "name": "smoke",
+      "hex": "#EDF2F4",
+      "role": "body text"
+    },
+    {
+      "name": "smoke-dim",
+      "hex": "#C3D1DA",
+      "role": "secondary text"
+    },
+    {
+      "name": "pink",
+      "hex": "#FF2E88",
+      "role": "accent fill \u2014 a solid, never a small glyph"
+    },
+    {
+      "name": "pink-ink",
+      "hex": "#FF94C1",
+      "role": "accent as ink: links, marks, focus"
+    },
+    {
+      "name": "pink-deep",
+      "hex": "#C41A63",
+      "role": "accent pressed"
+    },
+    {
+      "name": "night",
+      "hex": "#12202B",
+      "role": "text on the accent fill"
+    },
+    {
+      "name": "gold",
+      "hex": "#C9A45C",
+      "role": "gold grain, decorative",
+      "decorative": true
+    },
+    {
+      "name": "gold-soft",
+      "hex": "#E0C48C",
+      "role": "gold grain, lighter, decorative",
+      "decorative": true
+    }
+  ],
+  "grounds": [
+    "ink",
+    "panel",
+    "panel-2"
+  ],
+  "pairs": [
+    {
+      "fg": "smoke",
+      "bg": "ink",
+      "min": 7,
+      "note": "body text on the wall"
+    },
+    {
+      "fg": "smoke",
+      "bg": "panel",
+      "min": 7,
+      "note": "body text on a panel"
+    },
+    {
+      "fg": "smoke",
+      "bg": "panel-2",
+      "min": 7,
+      "note": "body text in a well"
+    },
+    {
+      "fg": "smoke-dim",
+      "bg": "ink",
+      "min": 4.5,
+      "note": "secondary text on the wall"
+    },
+    {
+      "fg": "smoke-dim",
+      "bg": "panel",
+      "min": 4.5,
+      "note": "secondary text on a panel"
+    },
+    {
+      "fg": "smoke-dim",
+      "bg": "panel-2",
+      "min": 4.5,
+      "note": "secondary text in a well"
+    },
+    {
+      "fg": "pink-ink",
+      "bg": "ink",
+      "min": 4.5,
+      "note": "links and marks on the wall"
+    },
+    {
+      "fg": "pink-ink",
+      "bg": "panel",
+      "min": 4.5,
+      "note": "links on a panel"
+    },
+    {
+      "fg": "pink-ink",
+      "bg": "panel-2",
+      "min": 4.5,
+      "note": "links in a well"
+    },
+    {
+      "fg": "night",
+      "bg": "pink",
+      "min": 4.5,
+      "note": "label on the accent fill"
+    },
+    {
+      "fg": "smoke",
+      "bg": "pink-deep",
+      "min": 4.5,
+      "note": "label on the accent, pressed"
+    },
+    {
+      "fg": "night",
+      "bg": "gold-soft",
+      "min": 7,
+      "note": "label on a gold chip"
+    }
+  ]
+}

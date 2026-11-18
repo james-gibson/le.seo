@@ -1,0 +1,299 @@
+/* ==========================================================================
+   le.ad — the wall
+   --------------------------------------------------------------------------
+   The tokens are declared once, here, and scripts/tokens.mjs refuses a build
+   where they disagree with src/lib/palette.json. A colour that is not in that
+   file is not a colour this site may paint.
+   ========================================================================== */
+
+:root {
+  --le-ink: #2E4A5F;
+  --le-ink-deep: #263F52;
+  --le-panel: #223949;
+  --le-panel-2: #1B2F3E;
+  --le-line: #6E92A8;
+  --le-line-soft: #4E6E82;
+  --le-smoke: #EDF2F4;
+  --le-smoke-dim: #C3D1DA;
+  --le-pink: #FF2E88;
+  --le-pink-ink: #FF94C1;
+  --le-pink-deep: #C41A63;
+  --le-night: #12202B;
+  --le-gold: #C9A45C;
+  --le-gold-soft: #E0C48C;
+
+  --le-mono: ui-monospace, "SFMono-Regular", "IBM Plex Mono", "Cascadia Mono",
+    Menlo, Consolas, monospace;
+  --le-step: 8px;
+  --le-radius: 0px;
+
+  /* tuiparts density: horizontal padding in character cells */
+  --le-cell: 1ch;
+  --le-pad: calc(var(--le-cell) * 2);
+  --le-pad-comfortable: calc(var(--le-cell) * 4);
+
+  --le-lease: 90s;
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--le-ink);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  font-family: var(--le-mono);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--le-smoke);
+  background-color: var(--le-ink);
+  /* The wall: a gold wash in the far corner, a cold bloom in the middle, and
+     no second bright edge anywhere. The contrast is diffused before any ink
+     is painted on it. */
+  background-image:
+    radial-gradient(120% 80% at 82% -10%, rgba(201, 164, 92, 0.22), transparent 58%),
+    radial-gradient(90% 70% at 8% 108%, rgba(237, 242, 244, 0.07), transparent 62%),
+    linear-gradient(180deg, #2b465b 0%, var(--le-ink) 42%, #2a4557 100%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+/* Gold grain: fractal noise tinted gold, laid over the wash at a strength you
+   notice only when it is gone. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.62;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.62' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.788 0 0 0 0 0.643 0 0 0 0 0.361 0 0 0 0.85 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 220px 220px;
+}
+
+/* A finer, colder grain on top, so the gold does not read as a flat tint. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.22;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 140px 140px;
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+}
+
+/* --- smoke ---------------------------------------------------------------
+   White smoke, not white light. Three puffs of a cold radial gradient behind
+   a heavy blur, drifting a few pixels. It sits under the ink, never over it. */
+
+.smoke {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.smoke span {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  filter: blur(72px);
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(237, 242, 244, 0.16),
+    rgba(237, 242, 244, 0.05) 45%,
+    transparent 70%
+  );
+  animation: drift 64s ease-in-out infinite alternate;
+}
+
+.smoke span:nth-child(1) {
+  width: 46vmax;
+  height: 32vmax;
+  left: -10vmax;
+  top: 6vmax;
+}
+
+.smoke span:nth-child(2) {
+  width: 38vmax;
+  height: 30vmax;
+  right: -8vmax;
+  top: 34vmax;
+  animation-duration: 81s;
+  animation-delay: -22s;
+  opacity: 0.72;
+}
+
+.smoke span:nth-child(3) {
+  width: 52vmax;
+  height: 26vmax;
+  left: 24vmax;
+  bottom: -14vmax;
+  animation-duration: 96s;
+  animation-delay: -54s;
+  opacity: 0.5;
+}
+
+@keyframes drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(4vmax, -3vmax, 0) scale(1.08);
+  }
+}
+
+/* --- type ---------------------------------------------------------------- */
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0 0 calc(var(--le-step) * 2);
+}
+
+h1 {
+  font-size: clamp(1.9rem, 4.2vw, 3rem);
+}
+
+h2 {
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+  margin-top: calc(var(--le-step) * 5);
+}
+
+h3 {
+  font-size: 1.02rem;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+  color: var(--le-smoke-dim);
+  margin-top: calc(var(--le-step) * 4);
+}
+
+p,
+li {
+  max-width: 68ch;
+}
+
+p {
+  margin: 0 0 calc(var(--le-step) * 2);
+}
+
+a {
+  color: var(--le-pink-ink);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+}
+
+a:hover {
+  color: var(--le-smoke);
+  text-decoration-color: var(--le-pink);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--le-pink-ink);
+  outline-offset: 2px;
+  border-radius: var(--le-radius);
+}
+
+::selection {
+  background: var(--le-pink);
+  color: var(--le-night);
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--le-line-soft);
+  margin: calc(var(--le-step) * 4) 0;
+}
+
+code,
+kbd,
+samp {
+  font-family: var(--le-mono);
+  font-size: 0.92em;
+  color: var(--le-smoke);
+  background: var(--le-panel-2);
+  border: 1px solid var(--le-line-soft);
+  padding: 0.08em 0.36em;
+}
+
+pre {
+  background: var(--le-panel-2);
+  border: 1px solid var(--le-line-soft);
+  padding: calc(var(--le-step) * 2);
+  overflow-x: auto;
+}
+
+pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+blockquote {
+  margin: calc(var(--le-step) * 3) 0;
+  padding-left: calc(var(--le-step) * 2);
+  border-left: 2px solid var(--le-pink);
+  color: var(--le-smoke-dim);
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: calc(var(--le-step) * 3) 0;
+  font-size: 0.94rem;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.55em 0.8em;
+  border-bottom: 1px solid var(--le-line-soft);
+  vertical-align: top;
+}
+
+th {
+  color: var(--le-smoke-dim);
+  font-weight: 500;
+  border-bottom-color: var(--le-line);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .smoke span {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
